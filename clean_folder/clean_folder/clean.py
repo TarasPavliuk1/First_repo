@@ -4,6 +4,7 @@ import re
 import shutil
 from normalize import normalize
 
+# file_parser
 JPEG_IMAGES = []
 JPG_IMAGES = []
 PNG_IMAGES = []
@@ -53,6 +54,7 @@ def scan(folder: Path):
 
 
 
+# normalize
 CYRILLIC_SYMBOLS = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ'
 TRANSLATION = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
                "f", "h", "ts", "ch", "sh", "sch", "", "y", "", "e", "yu", "u", "ja", "je", "ji", "g")
@@ -71,7 +73,7 @@ def normalize(name: str) -> str:
 
 
 
-
+# main
 
 def handle_media(file_name: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
@@ -90,3 +92,26 @@ def handle_archive(file_name: Path, target_folder: Path):
         return
     file_name.unlink()
 
+
+
+
+
+def clean_folder(directory: Path):
+    
+    #  scan для розбору папки
+    scan(directory)
+
+    # Обробка медіа-файлів типу MP3
+    for file in MP3_AUDIO:
+        handle_media(file, directory / "audio")
+
+    # Обробка зображень типу JPEG, JPG, PNG, SVG
+    for file in JPEG_IMAGES + JPG_IMAGES + PNG_IMAGES + SVG_IMAGES:
+        handle_media(file, directory / "images")
+
+    # Обробка архівів
+    for file in ARCHIVES:
+        handle_archive(file, directory / "archives")
+
+
+    clean_folder(clean_folder/clean_folder)
