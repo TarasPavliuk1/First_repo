@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 import re
 import shutil
-from normalize import normalize
+# from normalize import normalize
 
 # file_parser
 JPEG_IMAGES = []
