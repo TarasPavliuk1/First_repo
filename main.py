@@ -1,4 +1,5 @@
-from datetime import date, timedelta
+from datetime import date, datetime
+
 
 def get_birthdays_per_week(users):
     # Отримуємо поточну дату
@@ -44,16 +45,16 @@ def get_birthdays_per_week(users):
   
     
     return birthdays_per_week
+    # return users
 
-# Приклад використання:
-users = [
-    {"name": "Bill Gates", "birthday": date(2023, 10, 28)},
-    {"name": "Jan", "birthday": date(2023, 11, 6)},  # понеділок
-    {"name": "Kim", "birthday": date(2023, 11, 2)}, # четверг
-]
 
-result = get_birthdays_per_week(users)
-print(result)
+if __name__ == "__main__":
+    users = [
+        {"name": "Jan Koum", "birthday": datetime(1976, 1, 1).date()},
+    ]
 
-# Не розумію чому Monday': ['Kim'] якщо має бути 'Wednesday'
-# і чого 'Thursday': ['Jan']  якщо має бути 'Monday'
+    result = get_birthdays_per_week(users)
+    print(result)
+    # Виводимо результат
+    for day_name, names in result.items():
+        print(f"{day_name}: {', '.join(names)}")
